@@ -23,7 +23,7 @@ def decide(sheet):
     for row_index in range(len_row):
         if 'Return Authrization Number' in sheet[row_index]:
             col_index = sheet[row_index].index('Return Authrization Number')
-            dist['RMA number'] = _find_to_bottom(sheet, row_index, col_index)
+            dist['RMA number'] = _get_once_bottom(sheet, row_index, col_index)
             break
 
     for row_index in range(len_row):
@@ -78,6 +78,15 @@ def _combine_itself_and_bottom(sheet, row_index, col_index):
     return ''.join(data)
 
 
+def _get_once_bottom(sheet, row_index, col_index):
+    maximum = len(sheet)
+    row_index += 1
+    data = ''
+    while row_index < maximum:
+        if sheet[row_index][col_index] != '':
+            data = sheet[row_index][col_index]
+        row_index += 1
+    return data
 
 
 def _find_around(sheet, row_index, col_index):
