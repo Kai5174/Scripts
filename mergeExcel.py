@@ -94,13 +94,12 @@ def _find_around(sheet, row_index, col_index):
 def _find_to_bottom(sheet, row_index, col_index):
     maximum = len(sheet)
     row_index += 1
-    data = ''
+    data = []
     while row_index < maximum:
-        if sheet[row_index][col_index] != '':
-            data = sheet[row_index][col_index]
-            break
+        if sheet[row_index][col_index] != '' and sheet[row_index][col_index] != 'Return Date':
+            data.append(str(sheet[row_index][col_index]))
         row_index += 1
-    return data
+    return ''.join(data)
 
 
 def read_and_messsage(wb):
@@ -118,7 +117,7 @@ def read_and_messsage(wb):
 
 
 if __name__ == '__main__':
-    file_lists = glob.glob("smallRMA/*.xls")
+    file_lists = glob.glob("input/*.xls")
     row_num = -1
     dec = []
 
@@ -130,7 +129,7 @@ if __name__ == '__main__':
         for tmp in result:
             dec.append(decide(tmp))
 
-    outbook = xlsxwriter.Workbook('largeRMA/test.xlsx')
+    outbook = xlsxwriter.Workbook('output/merged.xlsx')
     outbook_sheet = outbook.add_worksheet()
     row_num = -1
     for data in dec:
