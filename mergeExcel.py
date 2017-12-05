@@ -85,6 +85,7 @@ def _get_once_bottom(sheet, row_index, col_index):
     while row_index < maximum:
         if sheet[row_index][col_index] != '':
             data = sheet[row_index][col_index]
+            break
         row_index += 1
     return data
 
