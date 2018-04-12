@@ -9,15 +9,22 @@ Party2's public key (n2, e), private key d2.
 Alice sends message m to these three parties
 
 
-Usage: python main.py [message value, need to be int less than 21]
 """
 import sys
+
 
 def get_priv_key(p, q, e):
     k = 1
     while ((p-1)*(q-1)*k+1) % e != 0:
         k += 1
     return int(((p-1)*(q-1)*k+1)/e)
+
+
+def retrieve_modulo(c, e, M):
+    k = 0
+    while (round((c+k*M)**(1/e))**e-(c+k*M)!= 0):
+        k += 1
+    return round((c+k*M)**(1/e))
 
 # https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
 
@@ -64,7 +71,7 @@ if __name__ == '__main__':
     print("party 1 got the message {}".format(m1))
 
     m2 = pow(c2, p2_pri, p2_pub[0])
-    print("party 2 got the message {}".format(m1))
+    print("party 2 got the message {}".format(m2))
 
 
     # Eve cracking the encryption
@@ -80,7 +87,6 @@ if __name__ == '__main__':
     N2 = modinv(M2, p2_pub[0])
 
     x = (c1*M1*N1 + c2*M2*N2) % M
-    print("Eve get the message by CRT: {}".format(x))
-    print("The triple power of message is {}".format(m**3))
+    print("Eve get the message by CRT: {}".format(retrieve_modulo(x, p1_pub[1], M)))
 
 
