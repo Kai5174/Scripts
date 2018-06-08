@@ -1,7 +1,7 @@
 import csv
 import pyperclip
 
-rfile = open('../table.csv', 'r')
+rfile = open('table.csv', 'r')
 reader = csv.reader(rfile)
 
 col_row = input('input row and col info (e.g. an 3x4 table, input 3 4): ')
