@@ -9,7 +9,7 @@ Demonstrate the way padding oracle attack
 
 
 SECRET_KEY = 'Damnsecretkey'
-target_msg = 'the magic file always appends with magics'
+target_msg = input('input a message:')
 
 
 class server():
