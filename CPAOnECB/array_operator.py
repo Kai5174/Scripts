@@ -14,7 +14,7 @@ def find_repeat(arrayList):
     the method would output block = 0123456, length = 7, offset = 4
 
     :param arrayList:
-    :return:
+    :return: block, blocklength, offset
     """
 
     p0 = 0
